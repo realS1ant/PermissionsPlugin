@@ -1,0 +1,5 @@
+name: EccentricRanks
+main: net.eccentricmc.ranksspigot.Main
+version: 1.0-ALPHA
+author: S1ant
+description: A rank system custom made for EccentricMC.
