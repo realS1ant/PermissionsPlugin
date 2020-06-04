@@ -10,7 +10,7 @@ import java.util.UUID;
 import static net.md_5.bungee.api.ChatColor.translateAlternateColorCodes;
 
 public class Utils {
-    private static String prefix = ChatColor.translateAlternateColorCodes('&', "&a❖ &c&lDEV &8● &c");
+    private static String prefix = ChatColor.translateAlternateColorCodes('&', "&c&l❖ &c&lDEV &8● &c");
 
     public static BaseComponent[] chat(String s) { return TextComponent.fromLegacyText(translateAlternateColorCodes('&', s)); }
 

@@ -6,6 +6,7 @@ import net.eccentricmc.ranksbungee.Players.Players;
 import net.eccentricmc.ranksbungee.Ranks.Rank;
 import net.eccentricmc.ranksbungee.Ranks.Ranks;
 import net.eccentricmc.ranksbungee.SQL.SQLPermissions;
+import net.eccentricmc.ranksbungee.SpigotCommunication.PluginMSG;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.sql.SQLException;
@@ -51,6 +52,8 @@ public class Permissions {
     public void setUp(ProxiedPlayer p) {
         try {
             List<String> playersCachedPerms = getPermissions(p.getUniqueId());
+            if(playersCachedPerms == null) playersCachedPerms = new ArrayList<>();
+            playersClass.addRank(p.getUniqueId().toString(), ranks.getDefaultRank());
             List<String> playersPerms = new ArrayList<>(playersCachedPerms);
             List<String> ranksList = playersClass.getRanks(p.getUniqueId());
             List<String> globalPerms = cachedPerms.getGloablPermissions();
@@ -64,43 +67,35 @@ public class Permissions {
                     if(!playersPerms.contains(perm)) playersPerms.add(perm);
                 }
             }
-            System.out.println("Finished going through ranks. Updated player's perms:\n"+playersPerms);
             if(!(playersPerms.contains("*"))){
                  for(String perm : playersPerms){
                      perm = perm.toLowerCase();
                      if(!perm.startsWith("-")){
                          p.setPermission(perm, true);
-                         System.out.println("added: "+perm);
                          if(!globalPerms.contains(perm)) cachedPerms.addGlobalPerm(perm);
                      } else {
-                         System.out.println("negated: "+perm);
                          p.setPermission(perm.replaceFirst("-", ""), false);
                      }
                  }
-                 System.out.println(playersPerms);
                  for(String perm : globalPerms){
                      perm = perm.toLowerCase();
-                     if(!(playersPerms.contains(perm)))p.setPermission(perm, false);
-                     System.out.println("took away: "+perm);
+                     if(!(playersPerms.contains(perm))) {
+                         p.setPermission(perm, false);
+                     }
                  }
             } else {
-                 main.getLogger().severe(p.getName() + " has *!");
                  for(String perm : globalPerms){
                      perm = perm.toLowerCase();
                      p.setPermission(perm, true);
                  }
                  for(String perm : playersPerms){
                      perm = perm.toLowerCase();
-                     if(perm.startsWith("-") && !perm.equalsIgnoreCase("*")){
-                         p.setPermission(perm.replaceFirst("-", ""), false);
-                         System.out.println("negated: "+perm);
-                     }
+                     if(perm.startsWith("-") && !perm.equalsIgnoreCase("*")) p.setPermission(perm.replaceFirst("-", ""), false);
                  }
             }
         } catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     //Returns list of permissions as string.

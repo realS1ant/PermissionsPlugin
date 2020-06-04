@@ -19,7 +19,7 @@ import java.util.List;
 
 public class RankCommand extends Command {
     public RankCommand() {
-        super("ep");
+        super("perms", "super_admin", "ep");
     }
 
     Ranks ranks = Ranks.getInstance();
@@ -30,15 +30,12 @@ public class RankCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(sender instanceof ProxiedPlayer) sender.sendMessage(Utils.chat(String.valueOf(cachedPerms.getPermissions(((ProxiedPlayer)sender).getUniqueId().toString()))));
-        sender.sendMessage(Utils.chat(String.valueOf(sender.getPermissions())));
-
         if (!(sender.hasPermission("user_cmd") || sender.hasPermission("SUPER_ADMIN"))) {
             sender.sendMessage(Utils.chat(prefix + "&cYou do not have permission to do that!"));
 
             return;
         }
-        //up
+        //ep
         if (args.length == 0) {
             sender.sendMessage(Utils.chat("&2&lECCENTRIC PERMISSIONS &7(1/1)\n" +
                     "&a/ep ranks &8- &7List all ranks\n" +
@@ -54,13 +51,14 @@ public class RankCommand extends Command {
             return;
         }
         switch (args[0]) {
-            //---------- /up ranks
+            //---------- /ep ranks
             case "ranks":
                 //Version Requested by Mateo (Hard Coded to order ranks manually.)
-                sender.sendMessage(Utils.chat(ChatColor.GREEN + ("Owner, Admin, Dev, SrMod, Mod, Helper, Builder, " +
+                sender.sendMessage(Utils.chat(ChatColor.GREEN + "Ranks: " + ChatColor.GOLD + ("Owner, Admin, Dev, SrMod, Mod, Helper, Builder, " +
                         "VIP, Media, God, Champion, Legend, Hero, Player")
                         .replaceAll(",", ChatColor.GRAY + "," + ChatColor.GOLD)));
                 return;
+            //---------- /ep perms %% /ep perms <rank>
             case "perms":
                 if(args.length >= 2){
                     if(ranks.getRankNames().contains(args[1])){

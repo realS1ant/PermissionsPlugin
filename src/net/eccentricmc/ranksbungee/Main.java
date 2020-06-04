@@ -7,6 +7,7 @@ import net.eccentricmc.ranksbungee.Ranks.Ranks;
 import net.eccentricmc.ranksbungee.Ranks.RanksConfig;
 import net.eccentricmc.ranksbungee.SQL.Database;
 import net.eccentricmc.ranksbungee.SQL.SQL;
+import net.eccentricmc.ranksbungee.SpigotCommunication.PluginMSG;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class Main extends Plugin {
@@ -20,7 +21,9 @@ public class Main extends Plugin {
         getLogger().finest("Enabled Successfully. ");
         getProxy().getPluginManager().registerCommand(this, new RankCommand());
         getProxy().getPluginManager().registerListener(this, new JoinListener());
-        getProxy().registerChannel("upr:updateplayer");
+        getProxy().getPluginManager().registerListener(this, new PluginMSG());
+        getProxy().registerChannel("er:updateplayer");
+        getProxy().registerChannel("er:permrequest");
         RanksConfig.getInstance().create();
         Ranks.getInstance().establish();
         CachedPerms.getInstance().loadCache();

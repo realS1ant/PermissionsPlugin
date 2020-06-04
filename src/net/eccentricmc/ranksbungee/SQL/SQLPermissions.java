@@ -28,7 +28,7 @@ public class SQLPermissions {
 
     public static Connection getConnection() throws SQLException {
         if(!database.getConnection().isValid(4)) {
-            Utils.sendDevMSG("connection not valid, reconnecting.");
+            Utils.sendDevMSG("Database connection is not valid, reconnecting.");
             database.openConnection();
         }
         return database.getConnection();

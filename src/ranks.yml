@@ -8,8 +8,6 @@ ranks:
     weight: 1
     permissions:
       - "*"
-      - "-litebans.*"
-      - "-litebans.ban"
   admin:
     prefix: "&c&lADMIN&c "
     tabprefix: "&c&lADMIN&7 "
