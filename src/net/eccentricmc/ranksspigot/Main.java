@@ -12,6 +12,8 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         getServer().getMessenger().registerOutgoingPluginChannel(this, "er:permrequest");
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "er:rankrequest");
+        getServer().getMessenger().registerIncomingPluginChannel(this, "er:rankrequest", new PMListener());
         getServer().getMessenger().registerIncomingPluginChannel(this, "er:updateplayer", new PMListener());
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
     }

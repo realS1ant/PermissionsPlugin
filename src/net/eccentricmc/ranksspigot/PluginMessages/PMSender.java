@@ -16,4 +16,12 @@ public class PMSender {
         p.sendPluginMessage(Main.getInstance(), "er:permrequest", out.toByteArray());
     }
 
+    static public void requestHighestRank(Player p){
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("H-RRequest");
+        out.writeUTF(p.getName());
+        System.out.println("Outgoing request for "+p.getName()+"'s rank.");
+        p.sendPluginMessage(Main.getInstance(), "er:rankrequest", out.toByteArray());
+    }
+
 }
