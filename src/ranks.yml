@@ -72,6 +72,7 @@ ranks:
     weight: 3
     permissions:
       - "*"
+      - "-ADMINCHAT_CMD"
   srmod:
     prefix: "&5&lSRMOD&5 "
     tabprefix: "&5&lSRMOD&7 "

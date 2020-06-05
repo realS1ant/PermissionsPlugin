@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="EccentricRanks-Bungee.jar">
+    <output-path>$PROJECT_DIR$/../../../Final/Waterfall</output-path>
+    <root id="archive" name="eccentricranks.jar">
+      <element id="module-output" name="eccentricranks" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../Development Tools/json_simple.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

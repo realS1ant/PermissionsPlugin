@@ -10,7 +10,7 @@ import java.util.UUID;
 import static net.md_5.bungee.api.ChatColor.translateAlternateColorCodes;
 
 public class Utils {
-    private static String prefix = ChatColor.translateAlternateColorCodes('&', "&c&l❖ &c&lDEV &8● &c");
+    private static String prefix = ChatColor.translateAlternateColorCodes('&', "&c&l❖ &c&lDEV &8● &f");
 
     public static BaseComponent[] chat(String s) { return TextComponent.fromLegacyText(translateAlternateColorCodes('&', s)); }
 
@@ -22,12 +22,10 @@ public class Utils {
 
     public static void sendDevMSG(String msg){
         ProxyServer.getInstance().getPlayers().forEach(p -> {
-            if(p.hasPermission("rank_dev") || p.hasPermission("rank_developer")){
+            if(p.hasPermission("ADMIN_NOTIFICATIONS")){
                 p.sendMessage(chat(prefix + msg));
             }
         });
         ProxyServer.getInstance().getConsole().sendMessage(chat(prefix + msg));
     }
-
-
 }

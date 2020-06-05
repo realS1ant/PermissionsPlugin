@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Depends/Waterfall.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../Waterfall Development/Dvelopment Files/Jar Files/Waterfall.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Depends/json_simple.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../Development Tools/json_simple.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

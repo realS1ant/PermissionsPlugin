@@ -26,7 +26,8 @@ public class RankCommand extends Command {
     Players player = new Players();
     Permissions permissions = Permissions.getInstance();
     CachedPerms cachedPerms = CachedPerms.getInstance();
-    String prefix = ChatColor.translateAlternateColorCodes('&', "&a❖ &lEccentricMC &8● &7");
+    String prefix = ChatColor.translateAlternateColorCodes('&', "&a❖ &lPerms &8● &7");
+    String adminPrefix = ChatColor.translateAlternateColorCodes('&', "&c❖ &lAdmin &8● &7");
 
     @Override
     public void execute(CommandSender sender, String[] args) {
@@ -54,7 +55,7 @@ public class RankCommand extends Command {
             //---------- /ep ranks
             case "ranks":
                 //Version Requested by Mateo (Hard Coded to order ranks manually.)
-                sender.sendMessage(Utils.chat(ChatColor.GREEN + "Ranks: " + ChatColor.GOLD + ("Owner, Admin, Dev, SrMod, Mod, Helper, Builder, " +
+                sender.sendMessage(Utils.chat(ChatColor.GREEN + "Available Ranks: " + ChatColor.GOLD + ("Owner, Admin, Dev, SrMod, Mod, Helper, Builder, " +
                         "VIP, Media, God, Champion, Legend, Hero, Player")
                         .replaceAll(",", ChatColor.GRAY + "," + ChatColor.GOLD)));
                 return;
@@ -124,7 +125,7 @@ public class RankCommand extends Command {
 
                     sender.sendMessage(Utils.chat(ChatColor.GRAY + "Players with rank " + ChatColor.DARK_GREEN + args[1].toUpperCase() + ChatColor.GRAY + ":"));
                     for (String playerName : playerNames) {
-                        sender.sendMessage(Utils.chat(ChatColor.GRAY + " - " + ChatColor.GRAY + playerName));
+                        sender.sendMessage(Utils.chat(ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + playerName));
                     }
                 });
 
@@ -150,14 +151,15 @@ public class RankCommand extends Command {
                         sender.sendMessage(Utils.chat(ChatColor.GREEN+"Ranks:"));
                             for(String rank : ranks){
                                 if(!rank.equalsIgnoreCase("default")) {
-                                    sender.sendMessage(Utils.chat(ChatColor.WHITE + " - " + Ranks.getInstance().getRankByName(rank).getPrefix()));
+                                    //sender.sendMessage(Utils.chat(ChatColor.WHITE + " - " + Ranks.getInstance().getRankByName(rank).getPrefix()));
+                                    sender.sendMessage(Utils.chat(ChatColor.DARK_GRAY + " - " + Ranks.getInstance().getRankByName(rank).getNameColor() + Ranks.getInstance().getRankByName(rank).getName().toUpperCase()));
                                 } else {
-                                    sender.sendMessage(Utils.chat(ChatColor.WHITE + " - " + ChatColor.GRAY + "Default"));
+                                    sender.sendMessage(Utils.chat(ChatColor.DARK_GRAY + " - " + ChatColor.GRAY + "DEFAULT"));
                                 }
                             }
                         sender.sendMessage(Utils.chat(ChatColor.GREEN + "Permissions:"));
                         for(String perm : perms){
-                            if(!perm.startsWith("rank_")) sender.sendMessage(Utils.chat(ChatColor.WHITE + " - " + ChatColor.GOLD + perm));
+                            if(!perm.startsWith("rank_")) sender.sendMessage(Utils.chat(ChatColor.DARK_GRAY + " - " + ChatColor.GOLD + perm));
                         }
 
                     } catch (Exception e) {
@@ -194,7 +196,7 @@ public class RankCommand extends Command {
                         }
                         for(ProxiedPlayer p : BungeeCord.getInstance().getPlayers()){
                             if(p.hasPermission("ADMIN_NOTIFICATIONS")){
-                                p.sendMessage(Utils.chat(prefix + ChatColor.DARK_GREEN + sender.getName() +
+                                p.sendMessage(Utils.chat(adminPrefix + ChatColor.DARK_GREEN + sender.getName() +
                                         " &7has added rank " + ChatColor.DARK_GREEN +
                                         args[2].toUpperCase() + " &7to " + ChatColor.DARK_GREEN + args[1]));
                             }
@@ -241,8 +243,8 @@ public class RankCommand extends Command {
                         }
                         for(ProxiedPlayer p : BungeeCord.getInstance().getPlayers()){
                             if(p.hasPermission("ADMIN_NOTIFICATIONS")){
-                                p.sendMessage(Utils.chat(prefix + ChatColor.DARK_GREEN + sender.getName() +
-                                        " &7has added rank " + ChatColor.DARK_GREEN +
+                                p.sendMessage(Utils.chat(adminPrefix + ChatColor.DARK_GREEN + sender.getName() +
+                                        " &7has removed rank " + ChatColor.DARK_GREEN +
                                         args[2].toUpperCase() + " &7to " + ChatColor.DARK_GREEN + args[1]));
                             }
                         }
@@ -287,7 +289,7 @@ public class RankCommand extends Command {
                         sender.sendMessage(Utils.chat(prefix + ChatColor.GRAY + "Added permission " + ChatColor.DARK_GREEN + perm.toUpperCase() + ChatColor.GRAY + " to " + ChatColor.DARK_GREEN + args[1]));
                         for(ProxiedPlayer p : BungeeCord.getInstance().getPlayers()){
                             if(p.hasPermission("ADMIN_NOTIFICATIONS")){
-                                p.sendMessage(Utils.chat(prefix + ChatColor.DARK_GREEN + sender.getName() +
+                                p.sendMessage(Utils.chat(adminPrefix + ChatColor.DARK_GREEN + sender.getName() +
                                         " &7has given permission " + ChatColor.DARK_GREEN +
                                         args[2].toUpperCase() + " &7to " + ChatColor.DARK_GREEN + args[1]));
                             }
@@ -332,7 +334,7 @@ public class RankCommand extends Command {
                         sender.sendMessage(Utils.chat(prefix + ChatColor.GRAY + "Removed permission " + ChatColor.DARK_GREEN + perm.toUpperCase() + ChatColor.GRAY + " from " + ChatColor.DARK_GREEN + args[1]));
                         for(ProxiedPlayer p : BungeeCord.getInstance().getPlayers()){
                             if(p.hasPermission("ADMIN_NOTIFICATIONS")){
-                                p.sendMessage(Utils.chat(prefix + ChatColor.DARK_GREEN + sender.getName() +
+                                p.sendMessage(Utils.chat(adminPrefix + ChatColor.DARK_GREEN + sender.getName() +
                                         " &7has taken permission " + ChatColor.DARK_GREEN +
                                         args[2].toUpperCase() + " &7from " + ChatColor.DARK_GREEN + args[1]));
                             }
