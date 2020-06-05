@@ -5,8 +5,8 @@ import net.eccentricmc.ranksbungee.Players.Players;
 import net.eccentricmc.ranksbungee.Ranks.Rank;
 import net.eccentricmc.ranksbungee.Ranks.Ranks;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 public class RanksAPI {
 
@@ -17,24 +17,18 @@ public class RanksAPI {
     public void reloadPermissionChache(){
         cache.loadCache();
     }
+    public void reloadAllPermsCache() { cache.loadGPermsCache(); }
 
-    public List<String> getPermissions(UUID uuid){
-        return cache.getPermissions(uuid.toString());
+    public List<String> getPermissions(String uuid){
+        return cache.getPermissions(uuid);
     }
-
-    public void addRank(UUID uuid, String rankName){
-        Rank rank = ranksClass.getRankByName(rankName);
-        if(rank == null) return;
-        if(!cache.getPermissions(uuid.toString()).contains("rank_"+rankName)) playersClass.addRank(
-                uuid.toString().replaceAll("-", ""),
-                rank);
-    }
-
-
-
-
-
-
+    public List<String> getRankPermissions(Rank r) { return ranksClass.getPermissions(r); }
+    public List<String> getPlayersWithRank(Rank r) { return ranksClass.getPlayers(r); }
+    public List<String> getRanks(String uuid) {return playersClass.getRanks(uuid); }
+    public Rank getHighestRank(String uuid) { return playersClass.getHighestRank(uuid); }
+    public Collection<String> getAllRanks() { return ranksClass.getRankNames(); }
+    public Rank getRankByName(String rankName) { return ranksClass.getRankByName(rankName); }
+    public Rank getDefaultRank() { return ranksClass.getDefaultRank(); }
 
     static private RanksAPI instance;
     public static RanksAPI getInstance() {

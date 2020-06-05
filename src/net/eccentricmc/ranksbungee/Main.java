@@ -24,6 +24,7 @@ public class Main extends Plugin {
         getProxy().getPluginManager().registerListener(this, new PluginMSG());
         getProxy().registerChannel("er:updateplayer");
         getProxy().registerChannel("er:permrequest");
+        getProxy().registerChannel("er:rankrequest");
         RanksConfig.getInstance().create();
         Ranks.getInstance().establish();
         CachedPerms.getInstance().loadCache();
