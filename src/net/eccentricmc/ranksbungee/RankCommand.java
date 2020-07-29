@@ -36,7 +36,6 @@ public class RankCommand extends Command {
 
             return;
         }
-        //ep
         if (args.length == 0) {
             sender.sendMessage(Utils.chat("&2&lECCENTRIC PERMISSIONS &7(1/1)\n" +
                     "&a/ep ranks &8- &7List all ranks\n" +
@@ -52,14 +51,12 @@ public class RankCommand extends Command {
             return;
         }
         switch (args[0]) {
-            //---------- /ep ranks
             case "ranks":
                 //Version Requested by Mateo (Hard Coded to order ranks manually.)
                 sender.sendMessage(Utils.chat(ChatColor.GREEN + "Available Ranks: " + ChatColor.GOLD + ("Owner, Admin, Dev, SrMod, Mod, Helper, Builder, " +
                         "VIP, Media, God, Champion, Legend, Hero, Player")
                         .replaceAll(",", ChatColor.GRAY + "," + ChatColor.GOLD)));
                 return;
-            //---------- /ep perms %% /ep perms <rank>
             case "perms":
                 if(args.length >= 2){
                     if(ranks.getRankNames().contains(args[1])){
@@ -87,7 +84,6 @@ public class RankCommand extends Command {
                     }
                     return;
                 }
-                //------------------------------------------ DONE ------------------------------------------
                 ProxyServer.getInstance().getScheduler().runAsync(Main.getInstance(), () -> {
                     List<String> perms = cachedPerms.getGloablPermissions();
                     if(perms == null){
@@ -106,7 +102,6 @@ public class RankCommand extends Command {
                     sender.sendMessage(Utils.chat(sb2.toString()));
                 });
                 return;
-            //---------- /up players <rank>
             case "players":
                 if (args.length < 2) {
                     sender.sendMessage(Utils.chat(ChatColor.RED + "Error: Invalid Args!"));
@@ -130,7 +125,6 @@ public class RankCommand extends Command {
                 });
 
                 return;
-            //---------- /up info <player>
             case "info":
                 if (args.length < 2) {
                     sender.sendMessage(Utils.chat(ChatColor.RED + "Error: Invalid Args!"));
@@ -168,7 +162,6 @@ public class RankCommand extends Command {
                     }
                 });
                 return;
-            //---------- /up addrank <player> <rank>
             case "addrank":
                 if(args.length < 3){
                     sender.sendMessage(Utils.chat(prefix + ChatColor.RED + "Error: Invalid Arguments!"));
